@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>Диана · 8 марта · подарок</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;1,600&family=Quicksand:wght@300;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            background: radial-gradient(circle at 20% 30%, #ffe6f0 0%, #ffdae8 40%, #ffc1d4 100%);
+            font-family: 'Quicksand', sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* главная карточка */
+        .giant-card {
+            max-width: 1100px;
+            width: 100%;
+            background: rgba(255, 240, 245, 0.75);
+            backdrop-filter: blur(12px);
+            border-radius: 60px 60px 60px 60px;
+            box-shadow: 0 30px 60px rgba(200, 80, 120, 0.4), 0 0 0 4px #ffeef4 inset, 0 0 0 8px #ffb7c9 inset;
+            padding: 40px 30px;
+            border: 3px solid #ffffffcc;
+        }
+
+        /* адаптация имени под экран */
+        .big-name {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(70px, 15vw, 130px);
+            font-weight: 600;
+            font-style: italic;
+            color: #aa335b;
+            text-shadow: 4px 4px 0 #ffc2d6, 8px 8px 20px #ff90b0;
+            line-height: 1.1;
+            margin: 10px 0 5px;
+            text-align: center;
+            word-break: break-word;
+        }
+
+        .sub-hello {
+            font-size: clamp(24px, 6vw, 36px);
+            background: #ffb6cd;
+            display: table;
+            padding: 10px 25px;
+            border-radius: 60px;
+            color: white;
+            font-weight: 700;
+            text-shadow: 2px 2px 0 #b34b6e;
+            box-shadow: 0 5px 0 #b34b6e;
+            margin: 0 auto 20px;
+            white-space: nowrap;
+        }
+        @media (max-width: 450px) {
+            .sub-hello { white-space: normal; }
+        }
+
+        /* интерактивные объекты — адаптивные размеры */
+        .interactive-garden {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            margin: 30px 0 20px;
+            padding: 20px 10px;
+            background: #ffdee9a0;
+            border-radius: 70px;
+            border: 3px dotted #ff88aa;
+        }
+
+        .clickable-item {
+            font-size: clamp(45px, 12vw, 80px);
+            cursor: pointer;
+            transition: 0.2s;
+            background: #fff2f7dd;
+            width: clamp(90px, 22vw, 140px);
+            height: clamp(90px, 22vw, 140px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 100px;
+            box-shadow: 0 8px 0 #d46f91, 0 0 0 3px white, 0 15px 25px #ffa5c0;
+            border: 2px solid #ffeef4;
+        }
+
+        .surprise-box {
+            background: #ffffffdd;
+            backdrop-filter: blur(4px);
+            border-radius: 50px;
+            padding: 25px 20px;
+            margin: 20px 0 15px;
+            border: 4px double #ff99bb;
+            font-size: clamp(20px, 5vw, 30px);
+            color: #681d39;
+            text-align: center;
+            min-height: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 15px 0 #e07b9f;
+        }
+
+        .heart-row {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+
+        .heart-em {
+            font-size: clamp(60px, 15vw, 90px);
+            filter: drop-shadow(2px 5px 8px #d65186);
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .extra-note {
+            font-size: clamp(18px, 4.5vw, 28px);
+            color: #a73a5e;
+            background: #ffeef4;
+            border-radius: 40px;
+            padding: 15px 20px;
+            margin: 10px 0;
+            border: 2px dashed #ff87a8;
+            text-align: center;
+            word-break: break-word;
+        }
+
+        /* кнопка теста */
+        .test-button {
+            background: linear-gradient(145deg, #c45a8b, #ad3b70);
+            border: none;
+            color: white;
+            font-size: clamp(30px, 8vw, 48px);
+            font-weight: 700;
+            padding: 18px 30px;
+            border-radius: 100px;
+            cursor: pointer;
+            box-shadow: 0 15px 0 #662a47, 0 20px 30px #d46f99;
+            margin: 30px auto 20px;
+            display: inline-block;
+            transition: 0.1s;
+            font-family: 'Playfair Display', serif;
+            letter-spacing: 2px;
+            border: 3px solid #ffdaea;
+            width: auto;
+            max-width: 90%;
+        }
+        .test-button:active {
+            transform: translateY(7px);
+            box-shadow: 0 8px 0 #662a47, 0 20px 30px #d46f99;
+        }
+
+        /* финальная подпись */
+        .final-signature {
+            margin: 40px 0 15px;
+            text-align: center;
+            border-top: 4px solid #ffb0c3;
+            padding-top: 35px;
+        }
+        .from-heart-text {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(40px, 10vw, 70px);
+            font-weight: 700;
+            background: linear-gradient(145deg, #ffb6cd, #ff93b6);
+            padding: 15px 25px;
+            border-radius: 100px;
+            color: white;
+            text-shadow: 4px 4px 0 #9f3e5e;
+            box-shadow: 0 15px 0 #8f3150, 0 20px 25px #ffa8c0;
+            display: inline-block;
+            border: 3px solid #fff9fb;
+            line-height: 1.2;
+        }
+
+        .date {
+            text-align: center;
+            margin-top: 30px;
+            font-size: clamp(18px, 4.5vw, 28px);
+            color: #97244e;
+            background: #ffdae8;
+            padding: 12px 15px;
+            border-radius: 50px;
+        }
+
+        /* СТРАНИЦА ТЕСТА — полностью адаптивная */
+        .test-page {
+            max-width: 1000px;
+            width: 100%;
+            background: rgba(255, 240, 250, 0.95);
+            backdrop-filter: blur(16px);
+            border-radius: 50px;
+            padding: 35px 25px;
+            box-shadow: 0 30px 60px #b34b6e, 0 0 0 5px #ffeef4 inset;
+            display: none;
+            border: 3px solid white;
+            margin: 0 auto;
+        }
+
+        .test-question {
+            font-size: clamp(28px, 7vw, 48px);
+            font-weight: 600;
+            color: #831d47;
+            margin-bottom: 35px;
+            line-height: 1.3;
+            background: #fff0f7;
+            padding: 25px 20px;
+            border-radius: 50px;
+            border: 4px dotted #ff80aa;
+            text-align: center;
+            word-break: break-word;
+        }
+
+        .test-options {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+            margin-bottom: 35px;
+        }
+
+        .test-option {
+            background: white;
+            font-size: clamp(32px, 8vw, 40px);
+            padding: 18px 20px;
+            border-radius: 80px;
+            border: 3px solid #ff96bb;
+            cursor: pointer;
+            transition: 0.1s;
+            text-align: center;
+            font-weight: 500;
+            color: #b32e62;
+            box-shadow: 0 8px 0 #dd87a8;
+            word-break: break-word;
+        }
+
+        .test-option:active {
+            transform: translateY(4px);
+            box-shadow: 0 4px 0 #dd87a8;
+        }
+
+        .test-nav {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .back-button, .restart-button {
+            background: #ffb0c4;
+            font-size: clamp(22px, 5vw, 32px);
+            padding: 12px 25px;
+            border-radius: 60px;
+            border: none;
+            font-weight: 600;
+            color: #4d142b;
+            cursor: pointer;
+            border: 2px solid white;
+            box-shadow: 0 6px 0 #b15577;
+            transition: 0.1s;
+            font-family: 'Quicksand', sans-serif;
+            flex: 1 1 auto;
+            min-width: 150px;
+        }
+
+        .test-counter {
+            font-size: clamp(22px, 5vw, 32px);
+            background: #ffccdd;
+            padding: 8px 25px;
+            border-radius: 60px;
+            border: 2px solid white;
+            white-space: nowrap;
+        }
+
+        .result-message {
+            font-size: clamp(32px, 8vw, 50px);
+            text-align: center;
+            background: #ffecf1;
+            padding: 35px 20px;
+            border-radius: 60px;
+            border: 5px double #ff88b0;
+            color: #9f2d58;
+            word-break: break-word;
+        }
+
+        .center { text-align: center; }
+    </style>
+</head>
+<body>
+    <!-- ГЛАВНАЯ -->
+    <div id="mainPage" class="giant-card">
+        <div class="big-name">Диана</div>
+        <div class="sub-hello">С 8 марта!</div>
+
+        <div class="interactive-garden">
+            <div class="clickable-item" onclick="showSurprise('flower')">🌸</div>
+            <div class="clickable-item" onclick="showSurprise('butterfly')">🦋</div>
+            <div class="clickable-item" onclick="showSurprise('heart')">❤️</div>
+            <div class="clickable-item" onclick="showSurprise('gift')">🎁</div>
+            <div class="clickable-item" onclick="showSurprise('sun')">☀️</div>
+        </div>
+
+        <div class="surprise-box" id="surpriseMessage">
+            <div style="font-size: 1.3em;">✨🌷✨</div>
+            <div>Нажми на любой цветок, бабочку или сердечко ✨</div>
+        </div>
+
+        <div class="heart-row">
+            <div class="heart-em" onclick="showExtraLove()">🥰</div>
+            <div class="heart-em" onclick="showExtraLove()">💝</div>
+            <div class="heart-em" onclick="showExtraLove()">🌹</div>
+        </div>
+        <div class="extra-note" id="extraNote">🔸 нажми на сердечко — появится нежность 🔸</div>
+
+        <div class="center">
+            <button class="test-button" onclick="showTestPage()">🌷 ПРОЙТИ ТЕСТ (10 вопросов) 🌷</button>
+        </div>
+
+        <!-- ФИНАЛЬНАЯ ПОДПИСЬ (ОДИН РАЗ) -->
+        <div class="final-signature">
+            <div class="from-heart-text">ОТ ВСЕЙ ДУШИ, АРТУР</div>
+        </div>
+
+        <div class="date">🌼 Люблю тебя 🌼</div>
+    </div>
+
+    <!-- СТРАНИЦА ТЕСТА -->
+    <div id="testPage" class="test-page">
+        <div id="quizArea">
+            <div class="test-question" id="questionText">Загрузка...</div>
+            <div class="test-options" id="optionsContainer"></div>
+            <div class="test-nav">
+                <button class="back-button" onclick="hideTestPage()">⬅ На главную</button>
+                <span class="test-counter" id="questionCounter">1/10</span>
+                <button class="restart-button" onclick="restartTest()">🔄 Сначала</button>
+            </div>
+        </div>
+        <div id="resultArea" class="result-message" style="display: none;"></div>
+    </div>
+
+    <script>
+        // --- Интерактив главной ---
+        function showSurprise(type) {
+            const box = document.getElementById('surpriseMessage');
+            let message = '';
+            switch(type) {
+                case 'flower': message = '🌸 «Ты нежна, как этот цветок!» 🌸'; break;
+                case 'butterfly': message = '🦋 «Порхай по жизни легко!» 🦋'; break;
+                case 'heart': message = '❤️ «Ты самое дорогое сердечко!» ❤️'; break;
+                case 'gift': message = '🎁 «Море цветов и улыбок тебе!» 🎁'; break;
+                case 'sun': message = '☀️ «Сияй ярко, как солнце!» ☀️'; break;
+                default: message = '💖 ты чудесна! 💖';
+            }
+            box.innerHTML = `<div style="font-size:1.2em;">${message}</div>`;
+        }
+
+        function showExtraLove() {
+            const extra = document.getElementById('extraNote');
+            const messages = [
+                '💗 Бесконечно нежная, с 8 Марта! 💗',
+                '💕 Ты лучше всех, Диана! 💕',
+                '🌸 Пусть счастье будет огромным! 🌸',
+                '✨ Оставайся такой же лучезарной ✨'
+            ];
+            extra.innerHTML = `✨💐✨ ${messages[Math.floor(Math.random() * messages.length)]} ✨💐✨`;
+            extra.style.background = '#ffd9e8';
+        }
+
+        // --- Переключение ---
+        function showTestPage() {
+            document.getElementById('mainPage').style.display = 'none';
+            document.getElementById('testPage').style.display = 'block';
+            restartTest();
+        }
+
+        function hideTestPage() {
+            document.getElementById('testPage').style.display = 'none';
+            document.getElementById('mainPage').style.display = 'block';
+        }
+
+        // --- 10 вопросов (милота/красота) ---
+        const questions = [
+            { text: "Насколько ты милая (по шкале от 0 до 10)?", options: ["10", "10", "10"] },
+            { text: "Сколько красоты в тебе (от 0 до 10)?", options: ["10", "10", "10"] },
+            { text: "Твой уровень нежности (от 0 до 10)?", options: ["10", "10", "10"] },
+            { text: "На сколько красивая твоя улбыка (10 - ОООООЧЕНЬ)?", options: ["10", "10", "10"] },
+            { text: "Сколько очарования в твоих глазах?", options: ["10", "10", "10"] },
+            { text: "Твой стиль (от 0 до 10)?", options: ["10", "10", "10"] },
+            { text: "Как много ты для меня значишь?", options: ["10", "10", "10"] },
+            { text: "Твой уровень крутости)?", options: ["10", "10", "10"] },
+            { text: "Насколько ты МАТУР?", options: ["10", "10", "10"] },
+            { text: "Сколько любви ты заслуживаешь?", options: ["10", "10", "10"] }
+        ];
+
+        let currentQuestion = 0;
+        let answers = [];
+
+        function renderQuestion() {
+            const q = questions[currentQuestion];
+            document.getElementById('questionText').innerText = q.text;
+            const optsDiv = document.getElementById('optionsContainer');
+            optsDiv.innerHTML = '';
+            q.options.forEach((opt, index) => {
+                const btn = document.createElement('div');
+                btn.className = 'test-option';
+                btn.innerText = opt;
+                btn.onclick = () => selectAnswer(index);
+                optsDiv.appendChild(btn);
+            });
+            document.getElementById('questionCounter').innerText = `${currentQuestion+1}/${questions.length}`;
+            document.getElementById('quizArea').style.display = 'block';
+            document.getElementById('resultArea').style.display = 'none';
+        }
+
+        function selectAnswer(optIndex) {
+            answers.push(optIndex);
+            if (currentQuestion < questions.length - 1) {
+                currentQuestion++;
+                renderQuestion();
+            } else {
+                showResult();
+            }
+        }
+
+        function showResult() {
+            document.getElementById('quizArea').style.display = 'none';
+            const resultDiv = document.getElementById('resultArea');
+            resultDiv.style.display = 'block';
+            resultDiv.innerHTML = `🌷 ТЕСТ ПРОЙДЕН! 🌷<br><br> 
+                Твой результат: ТЫ САМАЯ ПРЕКРАСНАЯ <br> 
+                (10 из 10 по всем пунктам вхыхыхы)! <br><br>
+                💐 С 8 марта, Диана! 💐`;
+        }
+
+        function restartTest() {
+            currentQuestion = 0;
+            answers = [];
+            renderQuestion();
+        }
+
+        // анимация финальной подписи
+        window.addEventListener('load', function() {
+            const finalSign = document.querySelector('.from-heart-text');
+            if (finalSign) {
+                finalSign.addEventListener('click', function() {
+                    this.style.background = 'linear-gradient(145deg, #ff9ec2, #ff80ad)';
+                    setTimeout(() => {
+                        this.style.background = 'linear-gradient(145deg, #ffb6cd, #ff93b6)';
+                    }, 200);
+                });
+            }
+        });
+    </script>
+</body>
+</html>
